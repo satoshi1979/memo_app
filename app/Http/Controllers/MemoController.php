@@ -13,6 +13,23 @@ class MemoController extends Controller
         return view('memos.index', ['memos' => $memos]);
     }
 
+    public function create()
+    {
+        return view('memos.create');
+    }
+
+    public function store(Request $request)
+    {
+        $memo = new Memo();
+
+        $memo->title = $request->title;
+        $memo->body = $request->body;
+
+        $memo->save();
+
+        return redirect(route('memos.index'));
+    }
+
     public function show($id)
     {
         $memo = Memo::find($id);
